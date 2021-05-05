@@ -4,14 +4,13 @@ export interface State {
 };
 
 export interface Store {
-  stops: Stop[];
+  stop: Stop | undefined;
+  isPannelActive: boolean;
 };
 
 export interface Handlers {
-  clickStop: (key: number) => void;
 };
 
 export interface Props {
   store: Store;
-  handlers: Handlers;
 };

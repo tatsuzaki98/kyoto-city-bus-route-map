@@ -1,19 +1,26 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../modules';
-import {Store} from './types';
+import {useDispatch, useSelector} from 'react-redux';
+import {actionCreator, RootState} from '../../modules';
+import {Handlers, Store} from './types';
 import View from './view';
 
 
 const Map: React.FC = () => {
+  const dispatch = useDispatch();
+
   const store: Store = useSelector((rootState: RootState) => {
-    console.log(rootState.common.busStops);
     return {
-      stops: rootState.common.busStops,
+      stops: Object.values(rootState.common.busStops),
     };
   });
 
-  return <View {...{store}}/>;
+  const handlers: Handlers = {
+    clickStop: (key) => {
+      dispatch(actionCreator.common.setBusStop({key}));
+    },
+  };
+
+  return <View {...{store, handlers}}/>;
 };
 
 export default Map;

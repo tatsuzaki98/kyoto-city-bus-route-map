@@ -4,13 +4,12 @@ import {Stop} from '../../schema';
 export type Actions = SetBusStopAction | LoadBusStopsAction;
 
 export interface State {
-  busStopKey: number | null;
-  busStops: Stop[];
+  busStopKey?: number;
+  busStops: {[key: number]: Stop};
 };
 
 const initializeState = (): State => ({
-  busStopKey: null,
-  busStops: [],
+  busStops: {},
 });
 
 export const reducer = (state: State = initializeState(), action: Actions) => {
@@ -19,7 +18,7 @@ export const reducer = (state: State = initializeState(), action: Actions) => {
       return {...state, busStopKey: action.payload.key};
     case 'LOAD_BUS_STOPS':
 
-      return {...state, busStops: Object.values(action.payload.stops)};
+      return {...state, busStops: action.payload.stops};
     default:
       return state;
   }

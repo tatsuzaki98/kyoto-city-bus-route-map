@@ -1,4 +1,5 @@
 import React from 'react';
+import {ZoomControl} from 'react-leaflet';
 import {Circle, MapContainer, MapContainerProps, TileLayer} from 'react-leaflet';
 import {Props} from './types';
 
@@ -19,7 +20,8 @@ const View: React.FC<Props> = (props: Props) => {
 
   return (
     <div className='h-screen'>
-      <MapContainer className='flex-1' {...mapContainerProps}>
+      <MapContainer className='flex-1' {...mapContainerProps} zoomControl={false}>
+        <ZoomControl position='bottomleft'/>
         <TileLayer
           attribution='&copy; <a href="https://maps.gsi.go.jp/development/ichiran.html">地理院地図</a> contributors'
           url="https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png"
@@ -29,7 +31,7 @@ const View: React.FC<Props> = (props: Props) => {
             key={id}
             {...circleMarkerStyle}
             center={[each.geometry.coordinates[1], each.geometry.coordinates[0]]}
-            eventHandlers={{click: () => console.log(each.properties.label)}}
+            eventHandlers={{click: () => props.handlers.clickStop(each.properties.primaryKey)}}
           />
         ))}
       </MapContainer>
