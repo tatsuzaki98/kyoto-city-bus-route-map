@@ -1,5 +1,5 @@
 import express from 'express';
-import handlePost from './handlers';
+import {getAllStops} from './handlers';
 import * as configs from './utils';
 
 
@@ -7,10 +7,13 @@ import * as configs from './utils';
  * Server Configuration
  */
 const app: express.Express = express();
-
-
 app.use(express.json());
-app.post('/api/stops', handlePost); // /api/stops -d {primaryKeys: number[]}
+
+/*
+  request: /api/stops -d {primaryKeys: number[]}
+  response: Stop[]
+ */
+app.get('/api/stops', getAllStops);
 // app.post('/api/lines', getLines); // /api/lines -d {primaryKeys: number[]}
 // app.post('/api/routes', getRoutes); // /api/routes -d {primaryKeys: number[]}
 // app.post('/api/paths', getPaths); // /api/paths -d {primaryKeys: number[]}

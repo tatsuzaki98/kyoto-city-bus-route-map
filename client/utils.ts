@@ -1,9 +1,10 @@
-import {AxiosRequestConfig} from 'axios';
+import axios from 'axios';
 
-export const axiosConfig: AxiosRequestConfig = {
+
+export const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
     'X-Requested-With': 'XMLHttpRequest',
   },
   responseType: 'json',
-};
+});
