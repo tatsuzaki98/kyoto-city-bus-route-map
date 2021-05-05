@@ -1,0 +1,10 @@
+##### Directories
+/node_modules
+/build
+/.log
+/sandbox
+
+
+##### Specific Files
+*.css
+.DS_Store

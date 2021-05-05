@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "outDir": "../build",
+    "target": "es5",
+    "module": "CommonJS",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+  },
+  "include": [
+    "../client/**/*.ts",
+    "../server/**/*.ts",
+    "../client/**/*.tsx",
+  ],
+}
