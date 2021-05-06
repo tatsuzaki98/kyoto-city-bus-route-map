@@ -1,6 +1,5 @@
 import React from 'react';
-import {ZoomControl} from 'react-leaflet';
-import {Circle, MapContainer, MapContainerProps, TileLayer} from 'react-leaflet';
+import {Circle, MapContainer, MapContainerProps, Popup, TileLayer, ZoomControl} from 'react-leaflet';
 import {Props} from './types';
 
 
@@ -12,11 +11,12 @@ const View: React.FC<Props> = (props: Props) => {
 
   const circleMarkerStyle = {
     radius: 50,
-    color: '#00AAAA',
-    fillColor: '#00AAAA',
     fillOpacity: 0.5,
     weight: 1,
   };
+
+  // const green = 'rgba(52,211,153,1)';
+  const red = 'rgba(239,68,68,1)';
 
   return (
     <div className='h-screen'>
@@ -26,13 +26,17 @@ const View: React.FC<Props> = (props: Props) => {
           attribution='&copy; <a href="https://maps.gsi.go.jp/development/ichiran.html">地理院地図</a> contributors'
           url="https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png"
         />
-        {props.store.stops.map((each, id) => (
+        {Object.values(props.store.stops).map((each, id) => (
           <Circle
             key={id}
             {...circleMarkerStyle}
+            color={red}
+            fillColor={red}
             center={[each.geometry.coordinates[1], each.geometry.coordinates[0]]}
-            eventHandlers={{click: () => props.handlers.clickStop(each.properties.primaryKey)}}
-          />
+            eventHandlers={{mousedown: () => props.handlers.clickStop(each.properties.primaryKey)}}
+          >
+            <Popup>{each.properties.label}</Popup>
+          </Circle>
         ))}
       </MapContainer>
     </div>

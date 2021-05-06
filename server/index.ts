@@ -1,5 +1,5 @@
 import express from 'express';
-import {getAllStops} from './handlers';
+import {getAllStops, getLinesByStopId} from './handlers';
 import * as configs from './utils';
 
 
@@ -14,7 +14,12 @@ app.use(express.json());
   response: Stop[]
  */
 app.get('/api/stops', getAllStops);
-// app.post('/api/lines', getLines); // /api/lines -d {primaryKeys: number[]}
+
+/*
+  request: /api/stops/{stopId}/lines
+  response: Lines[] - stopIdのバス停を通る路線
+ */
+app.get('/api/stops/:stopId/lines', getLinesByStopId); // /api/lines -d {primaryKeys: number[]}
 // app.post('/api/routes', getRoutes); // /api/routes -d {primaryKeys: number[]}
 // app.post('/api/paths', getPaths); // /api/paths -d {primaryKeys: number[]}
 

@@ -1,5 +1,5 @@
 import {Action} from 'redux';
-import {Stop} from '../../schema';
+import {Stop, Line} from '../../schema';
 
 
 /* Storeに特定の一つのバス停を登録する */
@@ -22,5 +22,17 @@ export interface LoadBusStopsAction extends Action {
 };
 export const loadBusStops = (payload: LoadBusStopsPayload): LoadBusStopsAction => ({
   type: 'LOAD_BUS_STOPS',
+  payload,
+});
+
+
+/* 路線を取り込む */
+interface LoadLinesPayload {lines: {[key: number]: Line}};
+export interface LoadLinesAction extends Action {
+  type: 'LOAD_LINES';
+  payload: LoadLinesPayload;
+};
+export const loadLines = (payload: LoadLinesPayload): LoadLinesAction => ({
+  type: 'LOAD_LINES',
   payload,
 });

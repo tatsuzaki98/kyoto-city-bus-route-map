@@ -4,7 +4,8 @@ export interface State {
 };
 
 export interface Store {
-  stops: Stop[];
+  stops: {[key: number]: Stop};
+  // focused: number | undefined;
 };
 
 export interface Handlers {

@@ -8,11 +8,9 @@ import View from './view';
 const Map: React.FC = () => {
   const dispatch = useDispatch();
 
-  const store: Store = useSelector((rootState: RootState) => {
-    return {
-      stops: Object.values(rootState.common.busStops),
-    };
-  });
+  const store: Store = useSelector((rootState: RootState) => ({
+    stops: rootState.common.busStops,
+  }));
 
   const handlers: Handlers = {
     clickStop: (key) => {
