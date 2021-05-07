@@ -99,7 +99,7 @@ $(NPM_INSTALL_LOG): $(PACKAGE_JSON)
 
 ##### Bundle All
 .PHONY: build
-build: $(DIST_SERVER) $(DIST_CLIENT) $(DIST_HTML) $(DIST_CSS) $(DIST_GEOJSON)
+build: $(DIST_SERVER) $(DIST_CLIENT) $(DIST_HTML) $(DIST_CSS) $(DIST_GEOJSON) ./build/static/leaflet.css
 
 ##### Bundle Server
 $(DIST_SERVER): $(TS_CONFIG) $(SERVER_WEBPACK_CONF) $(SERVER_SRC_FILES) $(NPM_INSTALL_LOG)
@@ -125,6 +125,10 @@ $(DIST_CLIENT): $(TS_CONFIG) $(CLIENT_WEBPACK_CONF) $(CLIENT_SRC_FILES) $(NPM_IN
 
 ##### Copy Public Files
 $(DIST_HTML): $(PUBLIC_HTML)
+	cp $< $@
+
+##### Copy Leaflet CSS
+./build/static/leaflet.css: ./public/static/leaflet.css
 	cp $< $@
 
 ##### Copy Geojson Files

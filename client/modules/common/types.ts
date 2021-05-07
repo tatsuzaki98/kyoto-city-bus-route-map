@@ -1,5 +1,5 @@
 import {Action} from 'redux';
-import {Stop, Line} from '../../schema';
+import {Stop, Line, Path} from '../../schema';
 
 
 /* Storeに特定の一つのバス停を登録する */
@@ -34,5 +34,29 @@ export interface LoadLinesAction extends Action {
 };
 export const loadLines = (payload: LoadLinesPayload): LoadLinesAction => ({
   type: 'LOAD_LINES',
+  payload,
+});
+
+
+/* 特定の一つの路線の深いコピーを作成し、Storeに保持する */
+interface SetLinePayload {line: Line};
+export interface SetLineAction extends Action {
+  type: 'SET_LINE';
+  payload: SetLinePayload;
+};
+export const setLine = (payload: SetLinePayload): SetLineAction => ({
+  type: 'SET_LINE',
+  payload,
+});
+
+
+/* 区間を取り込む */
+interface LoadPathsPayload {paths: {[key: number]: Path}};
+export interface LoadPathsAction extends Action {
+  type: 'LOAD_PATHS';
+  payload: LoadPathsPayload;
+};
+export const loadPaths = (payload: LoadPathsPayload): LoadPathsAction => ({
+  type: 'LOAD_PATHS',
   payload,
 });

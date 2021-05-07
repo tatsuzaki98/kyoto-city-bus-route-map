@@ -1,11 +1,11 @@
-import {Stop} from '../../schema';
+import {Stop, Path} from '../../schema';
 
 export interface State {
 };
 
 export interface Store {
   stops: {[key: number]: Stop};
-  // focused: number | undefined;
+  paths: {[key: number]: Path};
 };
 
 export interface Handlers {

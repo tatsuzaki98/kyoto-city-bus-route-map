@@ -9,6 +9,7 @@ const Map: React.FC = () => {
   const dispatch = useDispatch();
 
   const store: Store = useSelector((rootState: RootState) => ({
+    paths: rootState.common.paths,
     stops: rootState.common.busStops,
   }));
 

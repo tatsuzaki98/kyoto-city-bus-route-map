@@ -1,5 +1,5 @@
 import express from 'express';
-import {getAllStops, getLinesByStopId} from './handlers';
+import {getAllStops, getLinesByStopId, getPathsByLineId} from './handlers';
 import * as configs from './utils';
 
 
@@ -19,7 +19,13 @@ app.get('/api/stops', getAllStops);
   request: /api/stops/{stopId}/lines
   response: Lines[] - stopIdのバス停を通る路線
  */
-app.get('/api/stops/:stopId/lines', getLinesByStopId); // /api/lines -d {primaryKeys: number[]}
+app.get('/api/stops/:stopId/lines', getLinesByStopId);
+
+/*
+  request: /api/lines/{lineId}/paths
+  response: Paths[] - lineIdの各区間
+ */
+app.get('/api/lines/:lineId/paths', getPathsByLineId);
 // app.post('/api/routes', getRoutes); // /api/routes -d {primaryKeys: number[]}
 // app.post('/api/paths', getPaths); // /api/paths -d {primaryKeys: number[]}
 

@@ -12,6 +12,7 @@ export interface Store {
 
 export interface Handlers {
   toggleLines: () => void;
+  clickLine: (lineKey: number) => void;
 };
 
 export interface Props {

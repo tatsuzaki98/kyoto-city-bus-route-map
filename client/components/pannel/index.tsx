@@ -4,7 +4,7 @@ import {RootState, actionCreator} from '../../modules';
 import {Store, State, Handlers} from './types';
 import {api} from '../../utils';
 import View from './view';
-import {Line} from '../../schema';
+import {Line, Path} from '../../schema';
 
 
 const Pannel: React.FC = () => {
@@ -37,6 +37,14 @@ const Pannel: React.FC = () => {
       } else {
         setState({...state, isLinesShown: false});
       }
+    },
+
+    clickLine: (lineKey) => {
+      api.get(`/api/lines/${lineKey}/paths`)
+          .then((response) => {
+            const paths = response.data as {[key: number]: Path};
+            dispatch(actionCreator.common.loadPaths({paths}));
+          });
     },
   };
 

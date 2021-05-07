@@ -1,5 +1,5 @@
 import React from 'react';
-import {Circle, MapContainer, MapContainerProps, Popup, TileLayer, ZoomControl} from 'react-leaflet';
+import {MapContainer, GeoJSON, MapContainerProps, Popup, TileLayer, ZoomControl, Circle} from 'react-leaflet';
 import {Props} from './types';
 
 
@@ -21,11 +21,17 @@ const View: React.FC<Props> = (props: Props) => {
   return (
     <div className='h-screen'>
       <MapContainer className='flex-1' {...mapContainerProps} zoomControl={false}>
+
+        {/* Zoom Control */}
         <ZoomControl position='bottomleft'/>
+
+        {/* TileLayer */}
         <TileLayer
           attribution='&copy; <a href="https://maps.gsi.go.jp/development/ichiran.html">地理院地図</a> contributors'
           url="https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png"
         />
+
+        {/* Ciicles */}
         {Object.values(props.store.stops).map((each, id) => (
           <Circle
             key={id}
@@ -35,8 +41,16 @@ const View: React.FC<Props> = (props: Props) => {
             center={[each.geometry.coordinates[1], each.geometry.coordinates[0]]}
             eventHandlers={{mousedown: () => props.handlers.clickStop(each.properties.primaryKey)}}
           >
-            <Popup>{each.properties.label}</Popup>
+            <Popup>
+              {each.properties.label}
+            </Popup>
           </Circle>
+        ))}
+
+        {/* Paths */}
+        {Object.values(props.store.paths).map((each) => (
+          <GeoJSON data={each} style={{weight: 5}} key={each.properties.primaryKey}>
+          </GeoJSON>
         ))}
       </MapContainer>
     </div>
